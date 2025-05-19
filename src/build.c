@@ -905,7 +905,7 @@ char *copy_buffer( CHAR_DATA *ch )
    buf[0] = '\0';
    for ( x = 0; x < ch->editor->numlines; x++ )
    {
-      strcpy( tmp, ch->editor->line[x] );
+      strncpy( tmp, ch->editor->line[x] );
       len = strlen(tmp);
       if ( tmp && tmp[len-1] == '~' )
 	tmp[len-1] = '\0';
@@ -1264,16 +1264,16 @@ void do_mset( CHAR_DATA *ch, char *argument )
     if ( victim )
     {
 	lockvictim = TRUE;
-	strcpy( arg1, victim->name );
+	strncpy( arg1, victim->name );
 	argument = one_argument( argument, arg2 );
-	strcpy( arg3, argument );
+	strncpy( arg3, argument );
     }
     else
     {
 	lockvictim = FALSE;
 	argument = one_argument( argument, arg1 );
 	argument = one_argument( argument, arg2 );
-	strcpy( arg3, argument );
+	strncpy( arg3, argument );
     }
 
     if ( !str_cmp( arg1, "on" ) )
@@ -3260,16 +3260,16 @@ void do_oset( CHAR_DATA *ch, char *argument )
     if ( obj )
     {
 	lockobj = TRUE;
-	strcpy( arg1, obj->name );
+	strncpy( arg1, obj->name );
 	argument = one_argument( argument, arg2 );
-	strcpy( arg3, argument );
+	strncpy( arg3, argument );
     }
     else
     {
 	lockobj = FALSE;
 	argument = one_argument( argument, arg1 );
 	argument = one_argument( argument, arg2 );
-	strcpy( arg3, argument );
+	strncpy( arg3, argument );
     }
 
     if ( !str_cmp( arg1, "on" ) )
@@ -4337,7 +4337,7 @@ void do_rset( CHAR_DATA *ch, char *argument )
     smash_tilde( argument );
     argument = one_argument( argument, arg1 );
     argument = one_argument( argument, arg2 );
-    strcpy( arg3, argument );
+    strncpy( arg3, argument );
 
     if ( arg1[0] == '\0' || arg2[0] == '\0' || arg3[0] == '\0' )
     {
@@ -4487,7 +4487,7 @@ char *sprint_reset( CHAR_DATA *ch, RESET_DATA *pReset, sh_int num, bool rlist )
 	  mob = get_mob_index( pReset->arg1 );
 	  room = get_room_index( pReset->arg3 );
 	  if ( mob )
-	    strcpy( mobname, mob->player_name );
+	    strncpy( mobname, mob->player_name );
 	  else
 	    strcpy( mobname, "Mobile: *BAD VNUM*" );
 	  if ( room )
@@ -4508,7 +4508,7 @@ char *sprint_reset( CHAR_DATA *ch, RESET_DATA *pReset, sh_int num, bool rlist )
 	  if ( (obj = get_obj_index( pReset->arg1 )) == NULL )
 	      strcpy( objname, "Object: *BAD VNUM*" );
 	  else
-	      strcpy( objname, obj->name );
+	      strncpy( objname, obj->name );
 	  sprintf( buf, "%2d) %s (%d) -> %s (%s) [%d]\n\r",
 	  			num,
 	  			objname,
@@ -4535,7 +4535,7 @@ char *sprint_reset( CHAR_DATA *ch, RESET_DATA *pReset, sh_int num, bool rlist )
 	  if ( (obj = get_obj_index( pReset->arg1 )) == NULL )
 	      strcpy( objname, "Object: *BAD VNUM*" );
 	  else
-	      strcpy( objname, obj->name );
+	      strncpy( objname, obj->name );
 	  sprintf( buf, "%2d) %s (%d) -> %s (carry) [%d]\n\r",
 	  			num,
 	  			objname,
@@ -4547,12 +4547,12 @@ char *sprint_reset( CHAR_DATA *ch, RESET_DATA *pReset, sh_int num, bool rlist )
 	  if ( (obj = get_obj_index( pReset->arg1 )) == NULL )
 	      strcpy( objname, "Object: *BAD VNUM*" );
 	  else
-	      strcpy( objname, obj->name );
+	      strncpy( objname, obj->name );
 	  room = get_room_index( pReset->arg3 );
 	  if ( !room )
 	      strcpy( roomname, "Room: *BAD VNUM*" );
 	  else
-	      strcpy( roomname, room->name );
+	      strncpy( roomname, room->name );
 	  sprintf( buf, "%2d) (object) %s (%d) -> %s (%d) [%d]\n\r",
 	  			num,
 	  			objname,
@@ -4565,7 +4565,7 @@ char *sprint_reset( CHAR_DATA *ch, RESET_DATA *pReset, sh_int num, bool rlist )
 	  if ( (obj2 = get_obj_index( pReset->arg1 )) == NULL )
 	      strcpy( objname, "Object1: *BAD VNUM*" );
 	  else
-	      strcpy( objname, obj2->name );
+	      strncpy( objname, obj2->name );
 	  if ( pReset->arg3 > 0
 	  &&  (obj = get_obj_index( pReset->arg3 )) == NULL )
 	      strcpy( roomname, "Object2: *BAD VNUM*" );
@@ -4573,7 +4573,7 @@ char *sprint_reset( CHAR_DATA *ch, RESET_DATA *pReset, sh_int num, bool rlist )
 	  if ( !obj )
 	      strcpy( roomname, "Object2: *NULL obj*" );
 	  else
-	      strcpy( roomname, obj->name );
+	      strncpy( roomname, obj->name );
 	  sprintf( buf, "%2d) (Put) %s (%d) -> %s (%d) [%d]\n\r",
 	  			num,
 	  			objname,
@@ -4593,7 +4593,7 @@ char *sprint_reset( CHAR_DATA *ch, RESET_DATA *pReset, sh_int num, bool rlist )
 	  }
 	  else
 	  {
-		strcpy( roomname, room->name );
+		strncpy( roomname, room->name );
 		sprintf( objname, "%s%s",
 				dir_name[pReset->arg2],
 		get_exit(room,pReset->arg2) ? "" : " (NO EXIT!)" );
@@ -4618,7 +4618,7 @@ char *sprint_reset( CHAR_DATA *ch, RESET_DATA *pReset, sh_int num, bool rlist )
 	  if ( (room = get_room_index( pReset->arg1 )) == NULL )
 		strcpy( roomname, "Room: *BAD VNUM*" );
 	  else
-		strcpy( roomname, room->name );
+		strncpy( roomname, room->name );
 	  sprintf( buf, "%2d) Randomize exits 0 to %d -> %s (%d)\n\r",
 	  			num,
 	  			pReset->arg2,
@@ -6013,7 +6013,7 @@ void edit_buffer( CHAR_DATA *ch, char *argument )
 	    
 	    for ( x = 0; x < edit->numlines; x++ )
 	    {
-	       strcpy ( temp_buf+p , edit->line[x] );
+	       strncpy ( temp_buf+p , edit->line[x] );
 	       p += strlen( edit->line[x] );
 	       temp_buf[p] = ' ';
 	       p++;
@@ -6074,7 +6074,7 @@ void edit_buffer( CHAR_DATA *ch, char *argument )
 		else
 		{
 		  for ( x = ++edit->numlines; x > line; x-- )
-			strcpy( edit->line[x], edit->line[x-1] );
+			strncpy( edit->line[x], edit->line[x-1] );
 		  strcpy( edit->line[line], "" );
 		  send_to_char( "Line inserted.\n\r> ", ch );
 		}
@@ -6106,7 +6106,7 @@ void edit_buffer( CHAR_DATA *ch, char *argument )
 			return;
 		    }
 		    for ( x = line; x < (edit->numlines - 1); x++ )
-			strcpy( edit->line[x], edit->line[x+1] );
+			strncpy( edit->line[x], edit->line[x+1] );
 		    strcpy( edit->line[edit->numlines--], "" );
 		    if ( edit->on_line > edit->numlines )
 			edit->on_line = edit->numlines;
