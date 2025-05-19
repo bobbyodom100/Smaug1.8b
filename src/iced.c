@@ -105,7 +105,7 @@ void iced_save_channels(void)
   FILE *fp;
   char name[IMC_DATA_LENGTH];
 
-  strcpy(name, imc_prefix);
+  strncpy(name, imc_prefix);
   strcat(name, "iced");
 
   fp=fopen(name, "w");
@@ -143,7 +143,7 @@ void iced_load_channels(void)
   char buf5[IMC_DATA_LENGTH];
   int p;
 
-  strcpy(name, imc_prefix);
+  strncpy(name, imc_prefix);
   strcat(name, "iced");
 
   fp=fopen(name, "r");
@@ -413,7 +413,7 @@ void iced_list(ice_channel *c, const char *cname, const char *from, const char *
   int i;
   int access;
 
-  strcpy(out,
+  strncpy(out,
 	 "Available commands:\n"
 	 "Lvl Ok? Name\n");
 
@@ -834,7 +834,7 @@ void iced_recv_msg_p(const char *from, const char *chan, const char *txt,
   imc_addkey(&out.data, "text", txt);
   imc_addkeyi(&out.data, "emote", emote);
 
-  strcpy(temp, imc_mudof(from)); /* since we do several imc_sends */
+  strncpy(temp, imc_mudof(from)); /* since we do several imc_sends */
   iced_privmsg(c, &out, temp);
 
   imc_freedata(&out.data);
