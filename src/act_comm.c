@@ -159,7 +159,7 @@ char *translate(int percent, const char *in, const char *name)
 		}
 		else
 		{
-		    strcpy(pbuf2, cnv->new);
+		    strncpy(pbuf2, cnv->new);
 		    pbuf2 += cnv->nlen;
 		}
 		pbuf += cnv->olen;
@@ -186,7 +186,7 @@ char *translate(int percent, const char *in, const char *name)
 	for (cnv = lng->first_cnv; cnv; cnv = cnv->next)
 	    if (!str_prefix(cnv->old, pbuf))
 	    {
-		strcpy(pbuf2, cnv->new);
+		strncpy(pbuf2, cnv->new);
 		pbuf += cnv->olen;
 		pbuf2 += cnv->nlen;
 		break;
@@ -2347,7 +2347,7 @@ void do_emote( CHAR_DATA *ch, char *argument )
     for ( plast = argument; *plast != '\0'; plast++ )
 	;
 
-    strcpy( buf, argument );
+    strncpy( buf, argument );
     if ( isalpha(plast[-1]) )
 	strcat( buf, "." );
 	for ( vch = ch->in_room->first_person; vch; vch = vch->next_in_room )
@@ -2831,7 +2831,7 @@ void do_omenu( CHAR_DATA *ch, char *argument )
     smash_tilde( argument );
     argument = one_argument( argument, arg1 );
     argument = one_argument( argument, arg2 );
-    strcpy( arg3, argument );
+    strncpy( arg3, argument );
 	 
     if ( arg1[0] == '\0' )
     {
@@ -2904,7 +2904,7 @@ void do_mmenu( CHAR_DATA *ch, char *argument )
     smash_tilde( argument );
     argument = one_argument( argument, arg1 );
     argument = one_argument( argument, arg2 );
-    strcpy( arg3, argument );
+    strncpy( arg3, argument );
 	 
     if ( arg1[0] == '\0' )
     {
@@ -3365,7 +3365,7 @@ void do_order( CHAR_DATA *ch, char *argument )
     bool found;
     bool fAll;
 
-    strcpy( argbuf, argument );
+    strncpy( argbuf, argument );
     argument = one_argument( argument, arg );
 
     if ( arg[0] == '\0' || argument[0] == '\0' )
