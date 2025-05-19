@@ -3936,7 +3936,7 @@ int make_color_sequence( const char *col, char *buf, DESCRIPTOR_DATA *d ) {
                   not reset, otherwise we would not be here. Luc 09/2000 */
                unsigned char changes = cl ^ d->prevcolor;
 
-               ln = sprintf( buf, "\033[" );
+               ln = snprintf( buf, "\033[" );
                if ( changes & 0x08 ) /* High Brightness */
                   ln += sprintf ( buf + ln, "1;" );
                if ( changes & 0x80 ) /* Blink */
