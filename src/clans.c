@@ -604,7 +604,7 @@ bool load_clan_file( char *clanfile )
     clan->pdeaths[6]= 0;
 
     found = FALSE;
-    sprintf( filename, "%s%s", CLAN_DIR, clanfile );
+    snprintf( filename, "%s%s", CLAN_DIR, clanfile );
 
     if ( ( fp = fopen( filename, "r" ) ) != NULL )
     {
@@ -641,7 +641,7 @@ bool load_clan_file( char *clanfile )
 	    {
 		char buf[MAX_STRING_LENGTH];
 
-		sprintf( buf, "Load_clan_file: bad section: %s.", word );
+		snprintf( buf, "Load_clan_file: bad section: %s.", word );
 		bug( buf, 0 );
 		break;
 	    }
@@ -683,7 +683,7 @@ bool load_council_file( char *councilfile )
     CREATE( council, COUNCIL_DATA, 1 );
 
     found = FALSE;
-    sprintf( filename, "%s%s", COUNCIL_DIR, councilfile );
+    snprintf( filename, "%s%s", COUNCIL_DIR, councilfile );
 
     if ( ( fp = fopen( filename, "r" ) ) != NULL )
     {
@@ -2245,7 +2245,7 @@ void do_guilds( CHAR_DATA *ch, char *argument)
 	return;
     }
 
-    sprintf( buf, "guild of %s", argument );
+    snprintf( buf, "guild of %s", argument );
     guild = get_clan( buf );
 	if ( !guild || guild->clan_type != CLAN_GUILD )
 		guild = get_clan( argument );
