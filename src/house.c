@@ -974,11 +974,11 @@ void do_homebuy( CHAR_DATA *ch, char *argument )
 				continue;
 			}
 		
-			strcpy( area, location->area->name );
+			strncpy( area, location->area->name );
 			if ( homeb->apartment )
 				sprintf( name, "(A) %s", location->name );
 			else
-				strcpy( name, location->name );
+				strncpy( name, location->name );
 			
 			bidinc = homeb->incpercent * (homeb->bid/100);
 			days = homeb->endtime/48;
