@@ -771,7 +771,7 @@ void imc_recv_chess(const imc_char_data *from, const char *to, const char *argum
     {
         if ( !str_cmp(argument, "stop") )
             return;
-        sprintf(buf, "%s is not here.", to);
+        snprintf(buf, "%s is not here.", to);
         imc_send_tell(NULL, from->name, buf, 1);
         return;
     }
@@ -780,7 +780,7 @@ void imc_recv_chess(const imc_char_data *from, const char *to, const char *argum
     {
         if ( !str_cmp(argument, "stop") )
             return;
-        sprintf(buf, "%s is not ready to be joined in a game.", to);
+        snprintf(buf, "%s is not ready to be joined in a game.", to);
         imc_send_tell(NULL, from->name, buf, 1);
         imc_send_chess((CHAR_DATA *)victim->pcdata->game_board->player1?:NULL,(char *)from->name,"stop");
         return;
@@ -790,7 +790,7 @@ void imc_recv_chess(const imc_char_data *from, const char *to, const char *argum
     {
         if ( victim->pcdata->game_board->player2 != NULL )
         {
-            sprintf(buf, "%s is already playing a game.", to);
+            snprintf(buf, "%s is already playing a game.", to);
             imc_send_tell(NULL, from->name, buf, 1);
             imc_send_chess((CHAR_DATA *)victim->pcdata->game_board->player1?:NULL,(char *)from->name,"stop");
             return;
@@ -883,7 +883,7 @@ void imc_recv_chess(const imc_char_data *from, const char *to, const char *argum
         return;
     }
     
-    sprintf(log_buf, "Unknown chess command from: %s, %s", from->name, argument);
+    snprintf(log_buf, "Unknown chess command from: %s, %s", from->name, argument);
     log_string(log_buf);
 }
 #endif
