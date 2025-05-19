@@ -58,7 +58,7 @@ void do_mpmset( CHAR_DATA *ch, char *argument )
 
     argument = one_argument( argument, arg1 );
     argument = one_argument( argument, arg2 );
-    strcpy( arg3, argument );
+    strncpy( arg3, argument );
 
     if ( !*arg1 )
     {
