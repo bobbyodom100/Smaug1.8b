@@ -5340,7 +5340,7 @@ void do_redit( CHAR_DATA *ch, char *argument )
 	    sprintf(buf,"exit %c 1",dir);
 	    do_redit(ch,buf);
 	}     
-	sprintf(buf,"exdesc %c %s",dir,argument);
+	snprintf(buf,"exdesc %c %s",dir,argument);
 	do_redit(ch,buf);
 	return;
     }
@@ -5364,7 +5364,7 @@ void do_redit( CHAR_DATA *ch, char *argument )
 	    if ( (xit = get_exit(location, edir)) == NULL )
 		return;
 	}     
-	sprintf( buf, "%s %s", xit->keyword, argument );
+	snprintf( buf, "%s %s", xit->keyword, argument );
 	STRFREE( xit->keyword );
 	xit->keyword = STRALLOC( buf );
 	return;
@@ -5532,7 +5532,7 @@ void do_redit( CHAR_DATA *ch, char *argument )
 	    else
 		rxit = NULL;
 	}
-	sprintf( tmpcmd, "exit %s %s %s", arg2, arg3, argument );
+	snprintf( tmpcmd, "exit %s %s %s", arg2, arg3, argument );
 	do_redit( ch, tmpcmd );
 	if ( numnotdir )
 	    xit = get_exit_num(tmploc, exnum);
@@ -5550,7 +5550,7 @@ void do_redit( CHAR_DATA *ch, char *argument )
 	}
 	if ( vnum )
 	{
-	    sprintf( tmpcmd, "%d redit exit %d %s %s",
+	    snprintf( tmpcmd, "%d redit exit %d %s %s",
 				vnum,
 				rev_dir[edir],
 				rvnum,
@@ -5709,7 +5709,7 @@ void do_redit( CHAR_DATA *ch, char *argument )
 	     xit->description = STRALLOC( "" );
 	   else
 	   {
-	     sprintf( buf, "%s\n\r", argument );
+	     snprintf( buf, "%s\n\r", argument );
 	     xit->description = STRALLOC( buf );
 	   }
 	   send_to_char( "Done.\n\r", ch );
@@ -6337,7 +6337,7 @@ void do_aassign( CHAR_DATA *ch, char *argument )
 	    return;
 	} 
 
-	sprintf( buf, "%s", argument );
+	snprintf( buf, "%s", argument );
         tarea = NULL;
 
 /*	if ( get_trust(ch) >= sysdata.level_modify_proto )   */
@@ -6529,7 +6529,7 @@ void fold_area( AREA_DATA *tarea, char *filename, bool install )
     sprintf( buf, "Saving %s...", tarea->filename );
     log_string_plus( buf, LOG_NORMAL, LEVEL_GREATER );
 
-    sprintf( buf, "%s.bak", filename );
+    snprintf( buf, "%s.bak", filename );
     rename( filename, buf );
     fclose( fpReserve );
     if ( ( fpout = fopen( filename, "w" ) ) == NULL )
