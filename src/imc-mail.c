@@ -779,7 +779,7 @@ static char *datestring(void)
 {
   char *buf=imc_getsbuf(100);
 
-  strcpy(buf, ctime(&imc_now));
+  strncpy(buf, ctime(&imc_now));
   buf[strlen(buf)-1]=0;
 
   imc_shrinksbuf(buf);
