@@ -5988,7 +5988,7 @@ void edit_buffer( CHAR_DATA *ch, char *argument )
 		while ( (wptr = strstr( lwptr, word1 )) != NULL )
 		{
 		    ++count;
-		    lineln = sprintf( buf, "%s%s", word2, wptr + wordln );
+		    lineln = snprintf( buf, "%s%s", word2, wptr + wordln );
 		    if (lineln + wptr - edit->line[x] > 79)
 			buf[lineln] = '\0';
 		    strcpy( wptr, buf );
