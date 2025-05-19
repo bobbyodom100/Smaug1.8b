@@ -264,7 +264,7 @@ const char *icec_command(const char *from, const char *arg)
   
   p=imc_getarg(arg, cmd, IMC_NAME_LENGTH);
   p=imc_getarg(p, chan, IMC_NAME_LENGTH);
-  strcpy(data, p);
+  strncpy(data, p);
 
   if (!cmd[0] || !chan[0])
     return "Syntax: icommand <command> <node:channel> [<data..>]";
@@ -274,12 +274,12 @@ const char *icec_command(const char *from, const char *arg)
   {
     c=icec_findlchannel(chan);
     if (c)
-      strcpy(chan, c->name);
+      strncpy(chan, c->name);
   }
 
   sprintf(out.to, "ICE@%s", ice_mudof(chan));
   strcpy(out.type, "ice-cmd");
-  strcpy(out.from, from);
+  strncpy(out.from, from);
   imc_initdata(&out.data);
   imc_addkey(&out.data, "channel", chan);
   imc_addkey(&out.data, "command", cmd);
@@ -295,7 +295,7 @@ void icec_sendmessage(ice_channel *c, const char *name, const char *text, int em
 {
   imc_packet out;
   
-  strcpy(out.from, name);
+  strncpy(out.from, name);
   imc_initdata(&out.data);
   imc_addkey(&out.data, "channel", c->name);
   imc_addkey(&out.data, "text", text);
