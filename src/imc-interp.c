@@ -202,7 +202,7 @@ static void getdata(const imc_packet *p, imc_char_data *d)
   if (imc_findignore(p->from, IMC_TRUST))
     trust=1;
 
-  strcpy(d->name, p->from);
+  strncpy(d->name, p->from);
   d->wizi = trust ? imc_getkeyi(&p->data, "wizi", 0) : 0;
   d->level = trust ? imc_getkeyi(&p->data, "level", 0) : 0;
   d->invis = 0;
@@ -220,7 +220,7 @@ static void setdata(imc_packet *p, const imc_char_data *d)
     return;
   }
 
-  strcpy(p->from, d->name);
+  strncpy(p->from, d->name);
 
   if (d->wizi)
     imc_addkeyi(&p->data, "wizi", d->wizi);
@@ -443,8 +443,8 @@ void imc_recv(const imc_packet *p)
       if (!imc_is_router)
     { 
     strcpy(out.type, "reject");
-    strcpy(out.to, p->from);
-    strcpy(out.from, p->to);
+    strncpy(out.to, p->from);
+    strncpy(out.from, p->to);
 
     imc_clonedata(&p->data, &out.data);
     imc_addkey(&out.data, "old-type", p->type);
@@ -480,7 +480,7 @@ void imc_recv_inforequest(const char *from) {
   
   extern imc_info *imc_info_list;
 
-  strcpy(reply.to, from);
+  strncpy(reply.to, from);
   strcpy(reply.from, "*");
 
   imc_initdata(&reply.data);
@@ -620,7 +620,7 @@ void imc_send_direct(const imc_char_data *from, int channel,
 
   for (c=imc_connect_list; c; c=c->next) /* Go through the list of direct connections */
       if (c->state==IMC_CONNECTED) {
-		  strcpy(tobuf, c->info->name);
+		  strncpy(tobuf, c->info->name);
 		  strcpy(out.to, "*@");
 		  strcat(out.to, tobuf);
           imc_send(&out); /* And send them what they think is a broadcast packet. */
