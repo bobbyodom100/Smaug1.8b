@@ -2084,7 +2084,7 @@ void do_bset( CHAR_DATA *ch, char *argument )
         if ( !str_cmp( argument, "none" ) )
             buf[0] = '\0';
         else
-            sprintf( buf, "%s %s", board->extra_removers, argument );
+            snprintf( buf, "%s %s", board->extra_removers, argument );
         DISPOSE( board->extra_removers );
         board->extra_removers = str_dup( buf ); 
         write_boards_txt( );
@@ -2102,7 +2102,7 @@ void do_bset( CHAR_DATA *ch, char *argument )
 	if ( !str_cmp( argument, "none" ) )
 	    buf[0] = '\0';
 	else
-	    sprintf( buf, "%s %s", board->extra_readers, argument );        
+	    snprintf( buf, "%s %s", board->extra_readers, argument );        
 	DISPOSE( board->extra_readers );
 	board->extra_readers = str_dup( buf );
 	write_boards_txt( );
@@ -2173,7 +2173,7 @@ void do_bset( CHAR_DATA *ch, char *argument )
         if ( !str_cmp( argument, "none" ) )
             buf[0] = '\0';
         else
-            sprintf( buf, "%s %s", board->extra_ballots, argument );
+            snprintf( buf, "%s %s", board->extra_ballots, argument );
         DISPOSE( board->extra_ballots );
         board->extra_ballots = str_dup( buf );
         write_boards_txt( );
