@@ -335,7 +335,7 @@ void imc_close_notify(const char *host)
   if (imc_active<IA_UP)
     return;
 
-  strcpy(shorthost,host);
+  strncpy(shorthost,host);
   if(strchr(shorthost,'['))
     *(strchr(shorthost,'['))=0;
 
@@ -483,7 +483,7 @@ static void do_read(imc_connect *c)
       newsize*=2;
 
     newbuf=imc_malloc(newsize);
-    strcpy(newbuf, c->inbuf);
+    strncpy(newbuf, c->inbuf);
     imc_free(c->inbuf, c->insize);
     c->inbuf=newbuf;
     c->insize=newsize;
@@ -500,7 +500,7 @@ static void do_read(imc_connect *c)
     newsize/=2;
 
     newbuf=imc_malloc(newsize);
-    strcpy(newbuf, c->inbuf);
+    strncpy(newbuf, c->inbuf);
     imc_free(c->inbuf, c->insize);
     c->inbuf=newbuf;
     c->insize=newsize;
@@ -550,7 +550,7 @@ static void do_write(imc_connect *c)
 
   /* throw away data we wrote */
 //  memmove(c->outbuf, c->outbuf+w, size-w+1);
-  strcpy(c->outbuf,c->outbuf+w);
+  strncpy(c->outbuf,c->outbuf+w);
 
   imc_stats.tx_bytes += w;
 }
@@ -595,7 +595,7 @@ static void do_send(imc_connect *c, const char *line)
       newsize*=2;
 
     newbuf=imc_malloc(newsize);
-    strcpy(newbuf, c->outbuf);
+    strncpy(newbuf, c->outbuf);
     imc_free(c->outbuf, c->outsize);
     c->outbuf=newbuf;
     c->outsize=newsize;
@@ -651,7 +651,7 @@ static const char *imc_getline(char *buffer)
 
   /* remove the line from the input buffer */
 //  memmove(buffer, buffer+i, strlen(buffer+i) + 1);
-  strcpy(buffer,buffer+i);
+  strncpy(buffer,buffer+i);
 
   imc_shrinksbuf(buf);
   return buf;
@@ -825,8 +825,8 @@ static void forward(imc_packet *p)
   if (!strcmp(imc_mudof(p->i.to), "*") ||
       !strcasecmp(imc_mudof(p->i.to), imc_name))
   {
-    strcpy(p->to, imc_nameof(p->i.to));    /* strip the name from the 'to' */
-    strcpy(p->from, p->i.from);
+    strncpy(p->to, imc_nameof(p->i.to));    /* strip the name from the 'to' */
+    strncpy(p->from, p->i.from);
 
     imc_recv(p);
   }
@@ -879,7 +879,7 @@ static void forward(imc_packet *p)
     int hubcnt,fromhub;
     hubcnt=0;
     fromhub=0;
-    strcpy(recievedfrom,imc_lastinpath(p->i.path)); 
+    strncpy(recievedfrom,imc_lastinpath(p->i.path)); 
     for (rf=imc_connect_list; rf; rf=rf->next)
     {
 	if(rf->info && rf->info->name && !strcmp(recievedfrom,rf->info->name))
