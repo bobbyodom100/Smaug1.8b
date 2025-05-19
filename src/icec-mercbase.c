@@ -61,7 +61,7 @@ void icec_save_channels(void)
   FILE *fp;
   char name[MAX_STRING_LENGTH];
 
-  strcpy(name, imc_prefix);
+  strncpy(name, imc_prefix);
   strcat(name, "icec");
 
   fp=fopen(name, "w");
@@ -110,7 +110,7 @@ void icec_load_channels(void)
   char buf4[MAX_STRING_LENGTH];
   int l;
 
-  strcpy(name, imc_prefix);
+  strncpy(name, imc_prefix);
   strcat(name, "icec");
 
   fp=fopen(name, "r");
@@ -649,9 +649,9 @@ bool icec_command_hook(CHAR_DATA *ch, const char *command, char *argument)
 	if ( arg[0] == '\0' && social->others_no_arg) 
 	{
 #ifdef SMAUG14
-		strcpy(buf2,(char *) act_string(social->others_no_arg, NULL, ch, NULL, victim,0));
+		strncpy(buf2,(char *) act_string(social->others_no_arg, NULL, ch, NULL, victim,0));
 #else
-		strcpy(buf2,(char *) act_string(social->others_no_arg, NULL, ch, NULL, victim));
+		strncpy(buf2,(char *) act_string(social->others_no_arg, NULL, ch, NULL, victim));
 #endif
 		buf2[strlen(buf2) - 2]=0;
 		argument = buf2;
@@ -669,9 +669,9 @@ bool icec_command_hook(CHAR_DATA *ch, const char *command, char *argument)
 	else if(victim==ch && social->others_auto)
 	{
 #ifdef SMAUG14
-		strcpy(buf2,(char *) act_string(social->others_no_arg, NULL, ch, NULL, victim,0));
+		strncpy(buf2,(char *) act_string(social->others_no_arg, NULL, ch, NULL, victim,0));
 #else
-		strcpy(buf2,(char *) act_string(social->others_auto, victim, ch, NULL, victim));
+		strncpy(buf2,(char *) act_string(social->others_auto, victim, ch, NULL, victim));
 #endif
 		buf2[strlen(buf2) - 2]=0;
 		argument = buf2;
@@ -679,9 +679,9 @@ bool icec_command_hook(CHAR_DATA *ch, const char *command, char *argument)
 	else if(social->others_found)
 	{
 #ifdef SMAUG14
-		strcpy(buf2,(char *) act_string(social->others_no_arg, NULL, ch, NULL, victim,0));
+		strncpy(buf2,(char *) act_string(social->others_no_arg, NULL, ch, NULL, victim,0));
 #else
-		strcpy(buf2,(char *) act_string(social->others_found, victim, ch, NULL, victim));
+		strncpy(buf2,(char *) act_string(social->others_found, victim, ch, NULL, victim));
 #endif
 		buf2[strlen(buf2) - 2]=0;
 		argument = buf2;
