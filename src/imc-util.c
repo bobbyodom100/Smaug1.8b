@@ -416,7 +416,7 @@ void imc_addname(char **list, const char *name)
   if ((*list)[0])
     sprintf(buf, "%s %s", *list, name);
   else
-    strcpy(buf, name);
+    strncpy(buf, name);
   
   imc_strfree(*list);
   *list=imc_strdup(buf);
