@@ -3922,7 +3922,7 @@ int make_color_sequence( const char *col, char *buf, DESCRIPTOR_DATA *d ) {
             if ( ( ( d->prevcolor ^ cl ) & 0x88 ) & ( cl ^ 0x88 ) ) {
                /* One or both the attribs have been reset.  Let's
                   resend the whole color status.  Luc 09/2000 */
-               ln = sprintf( buf, "\033[0;%s%s3%d;",
+               ln = snprintf( buf, "\033[0;%s%s3%d;",
                   ( cl & 0x08 ) ? "1;" : "",
                   ( cl & 0x80 ) ? "5;" : "",
                   cl & 0x07 );
