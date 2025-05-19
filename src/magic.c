@@ -404,7 +404,7 @@ dispel_casting (AFFECT_DATA *paf,CHAR_DATA *ch,CHAR_DATA *victim,int affect, boo
            strcpy( buf, "Someone" );
         else
         {
-           strcpy(buf,(IS_NPC(victim)?victim->short_descr:victim->name));
+           strncpy(buf,(IS_NPC(victim)?victim->short_descr:victim->name));
            buf[0] = toupper( buf[0] );
         }
 
@@ -849,7 +849,7 @@ int dice_parse(CHAR_DATA *ch, int level, char *exp)
 {
     char buf[MAX_INPUT_LENGTH];
 
-    strcpy( buf, exp );
+    strncpy( buf, exp );
     return rd_parse(ch, level, buf);
 }
 
@@ -1597,7 +1597,7 @@ void do_cast( CHAR_DATA *ch, char *argument )
 	mana = IS_NPC(ch) ? 0 : UMAX(skill->min_mana,
 	   100 / ( 2 + ch->level - skill->skill_level[ch->class] ) );
 	blood = UMAX(1, (mana+4) / 8);
-	strcpy( staticbuf, ch->alloc_ptr );
+	strncpy( staticbuf, ch->alloc_ptr );
 	target_name = one_argument(staticbuf, arg2);
 	DISPOSE( ch->alloc_ptr );
 	ch->substate = SUB_NONE;
