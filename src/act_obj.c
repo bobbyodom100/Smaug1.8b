@@ -2501,15 +2501,15 @@ void do_sacrifice( CHAR_DATA *ch, char *argument )
     }
     if ( !IS_NPC( ch ) && ch->pcdata->deity && ch->pcdata->deity->name[0] != '\0' )
     {
-	strcpy( name, ch->pcdata->deity->name );
+	strncpy( name, ch->pcdata->deity->name );
     }
     else if ( !IS_NPC( ch ) && IS_GUILDED(ch) && sysdata.guild_overseer[0] != '\0' ) 
     {
-	strcpy( name, sysdata.guild_overseer );
+	strncpy( name, sysdata.guild_overseer );
     }
     else if ( !IS_NPC( ch ) && ch->pcdata->clan && ch->pcdata->clan->deity[0] != '\0' )
     {
-	strcpy( name, ch->pcdata->clan->deity );
+	strncpy( name, ch->pcdata->clan->deity );
     }
     else
     {
@@ -2517,7 +2517,7 @@ void do_sacrifice( CHAR_DATA *ch, char *argument )
         {
                 "Thoric", "Nivek", "Altrag", "Darrek", "Lascivias", "Moonbeam", "Dria"
         };
-        strcpy(name, god_name_table[number_range(0,6)]);
+        strncpy(name, god_name_table[number_range(0,6)]);
     }
     ch->gold += 1;
     if ( obj->item_type == ITEM_CORPSE_NPC
