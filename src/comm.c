@@ -183,7 +183,7 @@ int port;
     current_time = (time_t) now_time.tv_sec;
 /*  gettimeofday( &boot_time, NULL);   okay, so it's kludgy, sue me :) */
     boot_time = time(0);         /*  <-- I think this is what you wanted */
-    strcpy( str_boot_time, ctime( &current_time ) );
+    strncpy( str_boot_time, ctime( &current_time ) );
 
     /*
      * Init boot time.
@@ -645,7 +645,7 @@ void game_loop( )
 			d->fcommand	= TRUE;
 			stop_idling( d->character );
 
-			strcpy( cmdline, d->incomm );
+			strncpy( cmdline, d->incomm );
 			d->incomm[0] = '\0';
 			
 			if ( d->character )
@@ -857,7 +857,7 @@ void new_descriptor( int new_desc )
 
     CREATE( dnew->outbuf, char, dnew->outsize );
 
-    strcpy( buf, inet_ntoa( sock.sin_addr ) );
+    strncpy( buf, inet_ntoa( sock.sin_addr ) );
     sprintf( log_buf, "Sock.sinaddr:  %s, port %hd.",
 		buf, dnew->port );
     log_string_plus( log_buf, LOG_COMM, sysdata.log_level );
@@ -1238,9 +1238,9 @@ void read_from_buffer( DESCRIPTOR_DATA *d )
      * Do '!' substitution.
      */
     if ( d->incomm[0] == '!' )
-	strcpy( d->incomm, d->inlast );
+	strncpy( d->incomm, d->inlast );
     else
-	strcpy( d->inlast, d->incomm );
+	strncpy( d->inlast, d->incomm );
 
     /*
      * Shift the input buffer.
@@ -3710,9 +3710,9 @@ void display_prompt( DESCRIPTOR_DATA *d )
             if ( ch == victim )
                     strcpy ( pbuf, "You" );
             else if ( IS_NPC(victim) )
-                    strcpy ( pbuf, victim->short_descr );
+                    strncpy ( pbuf, victim->short_descr );
             else
-                    strcpy ( pbuf, victim->name );
+                    strncpy ( pbuf, victim->name );
                 pbuf[0] = UPPER( pbuf[0] );
           }
           break;
@@ -3724,9 +3724,9 @@ void display_prompt( DESCRIPTOR_DATA *d )
             if ( ch == victim )
                     strcpy ( pbuf, "You" );
             else if ( IS_NPC(victim) )
-                    strcpy ( pbuf, victim->short_descr );
+                    strncpy ( pbuf, victim->short_descr );
             else
-                    strcpy ( pbuf, victim->name );
+                    strncpy ( pbuf, victim->name );
             pbuf[0] = UPPER( pbuf[0] );
           }
           break;
@@ -3819,7 +3819,7 @@ void display_prompt( DESCRIPTOR_DATA *d )
          break;
       case 'o':         /* display name of object on auction */
         if ( auction->item )
-           strcpy( pbuf, auction->item->name );
+           strncpy( pbuf, auction->item->name );
         break;
       case 'S':
         if      ( ch->style == STYLE_BERSERK )    strcpy( pbuf, "B" );
