@@ -702,7 +702,7 @@ void boot_db( void )
 
 	for ( ; ; )
 	{
-	    strcpy( strArea, fread_word( fpList ) );
+	    strncpy( strArea, fread_word( fpList ) );
 	    if ( strArea[0] == '$' )
 		break;
 
@@ -6222,7 +6222,7 @@ void load_buildlist( void )
 					continue;
 				}
 #if !defined(READ_AREA)  /* Dont always want to read stuff.. dunno.. shrug */
-				strcpy( word, fread_word( fp ) );
+				strncpy( word, fread_word( fp ) );
 				if ( word[0] != '#' || strcmp( &word[1], "AREA" ) )
 				{
 					sprintf( buf, "Make_buildlist: %s.are: no #AREA found.",
