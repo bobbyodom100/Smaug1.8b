@@ -4763,7 +4763,7 @@ MPROG_DATA *mprog_file_read( char *f, MPROG_DATA *mprg,
   MPROG_DATA *mprg_next, *mprg2;
   bool        done = FALSE;
 
-  sprintf( MUDProgfile, "%s%s", PROG_DIR, f );
+  snprintf( MUDProgfile, "%s%s", PROG_DIR, f );
 
   progfile = fopen( MUDProgfile, "r" );
   if ( !progfile )
@@ -4978,7 +4978,7 @@ MPROG_DATA *oprog_file_read( char *f, MPROG_DATA *mprg,
   MPROG_DATA *mprg_next, *mprg2;
   bool        done = FALSE;
 
-  sprintf( MUDProgfile, "%s%s", PROG_DIR, f );
+  snprintf( MUDProgfile, "%s%s", PROG_DIR, f );
 
   progfile = fopen( MUDProgfile, "r" );
   if ( !progfile )
@@ -5190,7 +5190,7 @@ MPROG_DATA *rprog_file_read( char *f, MPROG_DATA *mprg,
   MPROG_DATA *mprg_next, *mprg2;
   bool        done = FALSE;
 
-  sprintf( MUDProgfile, "%s%s", PROG_DIR, f );
+  snprintf( MUDProgfile, "%s%s", PROG_DIR, f );
 
   progfile = fopen( MUDProgfile, "r" );
   if ( !progfile )
@@ -5653,9 +5653,9 @@ OBJ_INDEX_DATA *make_object( int vnum, int cvnum, char *name )
 	pObjIndex->last_extradesc	= NULL;
 	if ( !cObjIndex )
 	{
-	  sprintf( buf, "A newly created %s", name );
+	  snprintf( buf, "A newly created %s", name );
 	  pObjIndex->short_descr	= STRALLOC( buf  );
-	  sprintf( buf, "Some god dropped a newly created %s here.", name );
+	  snprintf( buf, "Some god dropped a newly created %s here.", name );
 	  pObjIndex->description	= STRALLOC( buf );
 	  pObjIndex->action_desc	= STRALLOC( "" );
 	  pObjIndex->short_descr[0]	= LOWER(pObjIndex->short_descr[0]);
@@ -5743,9 +5743,9 @@ MOB_INDEX_DATA *make_mobile( int vnum, int cvnum, char *name )
 	pMobIndex->player_name		= STRALLOC( name );
 	if ( !cMobIndex )
 	{
-	  sprintf( buf, "A newly created %s", name );
+	  snprintf( buf, "A newly created %s", name );
 	  pMobIndex->short_descr	= STRALLOC( buf  );
-	  sprintf( buf, "Some god abandoned a newly created %s here.\n\r", name );
+	  snprintf( buf, "Some god abandoned a newly created %s here.\n\r", name );
 	  pMobIndex->long_descr		= STRALLOC( buf );
 	  pMobIndex->description	= STRALLOC( "" );
 	  pMobIndex->short_descr[0]	= LOWER(pMobIndex->short_descr[0]);
@@ -7755,7 +7755,7 @@ void fread_loginmsg( FILE *fp )
 		
 		if ( !fMatch )
 		{
-			sprintf( buf, "Load_loginmsg: no match: %s", word );
+			snprintf( buf, "Load_loginmsg: no match: %s", word );
 			bug ( buf, 0 );
 		}
 	}
